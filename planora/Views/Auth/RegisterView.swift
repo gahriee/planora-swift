@@ -23,7 +23,7 @@ struct RegisterView: View {
             }
             
             Button {
-                Swift.Task { await authVM.register(name: name, email: email, password: password) }
+                _Concurrency.Task { await authVM.register(name: name, email: email, password: password) }
             } label: {
                 if authVM.isLoading {
                     ProgressView().tint(.white)

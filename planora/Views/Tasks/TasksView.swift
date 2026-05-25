@@ -20,12 +20,12 @@ struct TasksView: View {
                 }
                 .swipeActions(edge: .trailing) {
                     Button(role: .destructive) {
-                        Swift.Task { await taskVM.delete(id: task.id) }
+                        _Concurrency.Task { await taskVM.delete(id: task.id) }
                     } label: { Label("Delete", systemImage: "trash") }
                 }
                 .swipeActions(edge: .leading) {
                     Button {
-                        Swift.Task { await taskVM.markDone(task) }
+                        _Concurrency.Task { await taskVM.markDone(task) }
                     } label: { Label("Done", systemImage: "checkmark") }
                     .tint(.green)
                 }
