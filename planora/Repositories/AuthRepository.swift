@@ -33,7 +33,7 @@ final class AuthRepository: AuthRepositoryProtocol {
     func observeAuthState(onChange: @escaping (AppUser?) -> Void) {
         auth.addStateDidChangeListener { [weak self] _, firebaseUser in
             guard let self, let firebaseUser else { onChange(nil); return }
-            Task {
+            _Concurrency.Task {
                 let snap = try? await self.db.collection(Constants.users)
                                              .document(firebaseUser.uid).getDocument()
                 let user = snap.flatMap { AppUser(document: $0.data() ?? [:], id: $0.documentID) }
