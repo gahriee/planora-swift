@@ -60,7 +60,7 @@ struct CreateTaskSheet: View {
                             priority:    priority,
                             dueDate:     hasDueDate ? dueDate : nil
                         )
-                        Task { await taskVM.create(task) }
+                        Swift.Task { await taskVM.create(task) }
                         dismiss()
                     }
                 }

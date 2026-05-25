@@ -37,7 +37,7 @@ struct TaskDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    Task {
+                    Swift.Task {
                         await taskVM.update(task)
                         dismiss()
                     }
