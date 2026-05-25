@@ -18,11 +18,16 @@ struct PlanoraApp: App {
             AppRouter()
                 .environmentObject(appState)
                 .environmentObject(taskVM)
-                .onReceive(NotificationCenter.default.publisher(for: .init("AuthChanged"))) { _ in
-                    if let userID = appState.currentUser?.id {
+                .onChange(of: appState.currentUser) { user in
+                    if let userID = user?.id {
                         taskVM.startObserving(userID: userID)
                     } else {
                         taskVM.stopObserving()
+                    }
+                }
+                .onAppear {
+                    if let userID = appState.currentUser?.id {
+                        taskVM.startObserving(userID: userID)
                     }
                 }
         }
